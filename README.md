@@ -4,7 +4,7 @@ front-end can be found here: https://github.com/MarcoBonaventura/web_app_Job_Man
 ## create the DB
 Run 
 ```sql
-CREATE DATABASE JobPortalDB` to create the dabatase
+CREATE DATABASE JobPortalDB
 ```
 
 ## create  tables
