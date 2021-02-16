@@ -2,8 +2,10 @@
 front-end can be found here: https://github.com/MarcoBonaventura/web_app_Job_Management
 
 ## create the DB
-Run `CREATE DATABASE JobPortalDB` to create the dabatase.
-
+Run 
+```sql
+CREATE DATABASE JobPortalDB` to create the dabatase
+```
 
 ## create  tables
 
@@ -23,7 +25,7 @@ Params Lib VARCHAR(100))
 
 repeate the same for tables `Job_Italia` and `Job_Filiali`
 
-```
+```sql
 CREATE TABLE Macro
 (MacroID INT IDENTITY(1,1) PRIMARY KEY,
 MacroVal VARCHAR(10))
@@ -33,7 +35,7 @@ MacroVal VARCHAR(10))
 ## Stored Procedures
 just some stored procedures used by webapi, for full source open an request please.
 
-```
+```sql
 USE [JobPortalDB]
 GO
 SET ANSI_NULLS ON
@@ -55,7 +57,7 @@ BEGIN
 END
 ```
 
-```
+```sql
 USE [JobPortalDB]
 GO
 SET ANSI_NULLS ON
@@ -81,7 +83,7 @@ BEGIN
 END
 ```
 
-```
+```sql
 USE [JobPortalDB]
 GO
 SET ANSI_NULLS ON
@@ -106,7 +108,7 @@ BEGIN
 END
 ```
 
-```
+```sql
 USE [JobPortalDB]
 GO
 SET ANSI_NULLS ON
