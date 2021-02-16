@@ -66,21 +66,21 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[insertJobPiano](@JobName as NVarchar(255), 
-								@Macro as NVarchar(255), 
-								@Lib as int,
-								@Friday2X as NVarchar(255),
-								@Suspended as NVarchar(255),
-								@Descr as NVarchar(255),
-								@Params as NVarchar(255),
-								@JobPage as NVarchar(255),
-								@Prty as int)
+ALTER PROCEDURE [dbo].[insertJobPiano]( @JobName as NVarchar(255), 
+					@Macro as NVarchar(255), 
+					@Lib as int,
+					@Friday2X as NVarchar(255),
+					@Suspended as NVarchar(255),
+					@Descr as NVarchar(255),
+					@Params as NVarchar(255),
+					@JobPage as NVarchar(255),
+					@Prty as int)
 AS
 BEGIN
 	DECLARE @newID int;
 	SELECT @newID = MAX(JobID) +1 FROM dbo.Job_Piano
 	UPDATE dbo.Job_Piano SET Prty +=1 WHERE Prty >= @Prty 
-    INSERT INTO dbo.Job_Piano (JobID, JobName, Macro, Lib, Friday2X, Suspended, Descr, Params, JobPage, Prty) 
+    	INSERT INTO dbo.Job_Piano (JobID, JobName, Macro, Lib, Friday2X, Suspended, Descr, Params, JobPage, Prty) 
 	VALUES(@newID, @JobName, @Macro, @Lib, @Friday2X, @Suspended, @Descr, @Params, @JobPage, @Prty)
 END
 ```
@@ -92,20 +92,20 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-ALTER PROCEDURE [dbo].[updateJobPiano](@JobID as int, 
-								@JobName as NVarchar(255), 
-								@Macro as NVarchar(255), 
-								@Lib as int, 
-								@Friday2X as NVarchar(255),
-								@Suspended as NVarchar(255),
-								@Descr as NVarchar(255),
-								@Params as NVarchar(255),
-								@JobPage as NVarchar(255),
-								@Prty as int)
+ALTER PROCEDURE [dbo].[updateJobPiano](	@JobID as int, 
+					@JobName as NVarchar(255), 
+					@Macro as NVarchar(255), 
+					@Lib as int, 
+					@Friday2X as NVarchar(255),
+					@Suspended as NVarchar(255),
+					@Descr as NVarchar(255),
+					@Params as NVarchar(255),
+					@JobPage as NVarchar(255),
+					@Prty as int)
 AS
 BEGIN
 	UPDATE dbo.Job_Piano 
-	SET  JobName = @JobName, Macro = @Macro, Lib = @Lib, Friday2X = @Friday2X,	Suspended = @Suspended, Descr = @Descr, Params = @Params, JobPage = @JobPage, Prty = @Prty 
+	SET  JobName = @JobName, Macro = @Macro, Lib = @Lib, Friday2X = @Friday2X, Suspended = @Suspended, Descr = @Descr, Params = @Params, JobPage = @JobPage, Prty = @Prty 
 	WHERE JobID = @JobID;
 END
 ```
