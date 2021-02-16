@@ -20,6 +20,8 @@ Run `CREATE DATABASE JobPortalDB` to create the dabatase.
 
 repeate the same for tables `Job_Italia` and `Job_Filiali`
 
-`CREATE TABLE Macro`  
+```CREATE TABLE Macro
+(MacroID INT IDENTITY(1,1) PRIMARY KEY,
+MacroVal VARCHAR(10))```  
 
 ## Build
