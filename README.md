@@ -33,7 +33,7 @@ MacroVal VARCHAR(10))
 
 
 ## Stored Procedures
-just some stored procedures used by webapi, for full source open an request please.
+just some stored procedures used by webapi, for full source open a request please.
 
 ```sql
 USE [JobPortalDB]
