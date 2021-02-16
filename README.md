@@ -7,7 +7,7 @@ Run `CREATE DATABASE JobPortalDB` to create the dabatase.
 
 ## create  tables
 
-```
+```sql
 CREATE TABLE Job_Piano 
 (JobID INT IDENTITY(1,1) PRIMARY KEY, 
 JobName VARCHAR(255), 
