@@ -4,6 +4,7 @@ front-end can be found here: https://github.com/MarcoBonaventura/web_app_Job_Man
 ## create the DB
 Run `CREATE DATABASE JobPortalDB` to create the dabatase.
 
+
 ## create  tables
 
 ```
@@ -28,4 +29,101 @@ CREATE TABLE Macro
 MacroVal VARCHAR(10))
 ```  
 
-## Build
+
+## Stored Procedures
+just some stored procedures used by webapi, for full source open an request please.
+
+```
+USE [JobPortalDB]
+GO
+/****** Object:  StoredProcedure [dbo].[getJobsList]    Script Date: 16/02/2021 14:28:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[getJobsList]( @PassedTableName as NVarchar(255) ) AS
+-- Counts the number of rows from any non-system Table, *SAFELY*
+BEGIN
+    DECLARE @ActualTableName AS NVarchar(255)
+
+    SELECT @ActualTableName = QUOTENAME( TABLE_NAME )
+    FROM INFORMATION_SCHEMA.TABLES
+    WHERE TABLE_NAME = @PassedTableName
+
+    DECLARE @sql AS NVARCHAR(MAX)
+    SELECT @sql = 'SELECT JobID, Prty, Macro, JobName, Lib, Suspended, Friday2X, Descr, Params, JobPage FROM' + @ActualTableName + ' ORDER BY Prty;'
+
+    EXEC(@SQL)
+END
+```
+
+```
+USE [JobPortalDB]
+GO
+/****** Object:  StoredProcedure [dbo].[insertJobPiano]    Script Date: 16/02/2021 14:30:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[insertJobPiano](@JobName as NVarchar(255), 
+								@Macro as NVarchar(255), 
+								@Lib as int,
+								@Friday2X as NVarchar(255),
+								@Suspended as NVarchar(255),
+								@Descr as NVarchar(255),
+								@Params as NVarchar(255),
+								@JobPage as NVarchar(255),
+								@Prty as int)
+AS
+BEGIN
+	DECLARE @newID int;
+	SELECT @newID = MAX(JobID) +1 FROM dbo.Job_Piano
+	UPDATE dbo.Job_Piano SET Prty +=1 WHERE Prty >= @Prty 
+    INSERT INTO dbo.Job_Piano (JobID, JobName, Macro, Lib, Friday2X, Suspended, Descr, Params, JobPage, Prty) 
+	VALUES(@newID, @JobName, @Macro, @Lib, @Friday2X, @Suspended, @Descr, @Params, @JobPage, @Prty)
+END
+```
+
+```
+USE [JobPortalDB]
+GO
+/****** Object:  StoredProcedure [dbo].[updateJobPiano]    Script Date: 16/02/2021 14:30:40 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[updateJobPiano](@JobID as int, 
+								@JobName as NVarchar(255), 
+								@Macro as NVarchar(255), 
+								@Lib as int, 
+								@Friday2X as NVarchar(255),
+								@Suspended as NVarchar(255),
+								@Descr as NVarchar(255),
+								@Params as NVarchar(255),
+								@JobPage as NVarchar(255),
+								@Prty as int)
+AS
+BEGIN
+	UPDATE dbo.Job_Piano 
+	SET  JobName = @JobName, Macro = @Macro, Lib = @Lib, Friday2X = @Friday2X,	Suspended = @Suspended, Descr = @Descr, Params = @Params, JobPage = @JobPage, Prty = @Prty 
+	WHERE JobID = @JobID;
+END
+```
+
+```
+USE [JobPortalDB]
+GO
+/****** Object:  StoredProcedure [dbo].[deleteMultiJobPiano]    Script Date: 16/02/2021 14:31:19 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[deleteMultiJobPiano](@JobID as nvarchar(max), @JobPrty as nvarchar(max)) 
+AS
+BEGIN
+	DECLARE @newPrty int;
+	SET @newPrty = (SELECT Prty FROM dbo.Job_Piano WHERE JobID = @JobID)
+	DELETE FROM dbo.Job_Piano WHERE JobID IN (@JobID)
+	UPDATE dbo.Job_Piano SET Prty -=1 WHERE Prty > @newPrty
+END
+```
