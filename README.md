@@ -36,13 +36,11 @@ just some stored procedures used by webapi, for full source open an request plea
 ```
 USE [JobPortalDB]
 GO
-/****** Object:  StoredProcedure [dbo].[getJobsList]    Script Date: 16/02/2021 14:28:36 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 ALTER PROCEDURE [dbo].[getJobsList]( @PassedTableName as NVarchar(255) ) AS
--- Counts the number of rows from any non-system Table, *SAFELY*
 BEGIN
     DECLARE @ActualTableName AS NVarchar(255)
 
@@ -60,7 +58,6 @@ END
 ```
 USE [JobPortalDB]
 GO
-/****** Object:  StoredProcedure [dbo].[insertJobPiano]    Script Date: 16/02/2021 14:30:04 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -87,7 +84,6 @@ END
 ```
 USE [JobPortalDB]
 GO
-/****** Object:  StoredProcedure [dbo].[updateJobPiano]    Script Date: 16/02/2021 14:30:40 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -113,7 +109,6 @@ END
 ```
 USE [JobPortalDB]
 GO
-/****** Object:  StoredProcedure [dbo].[deleteMultiJobPiano]    Script Date: 16/02/2021 14:31:19 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
