@@ -25,7 +25,7 @@ Descr Lib VARCHAR(100),
 Params Lib VARCHAR(100))
 ```
 
-repeate the same for tables `Job_Italia` and `Job_Filiali`
+repeat the same for tables `Job_Italia` and `Job_Filiali`
 
 ```sql
 CREATE TABLE Macro
